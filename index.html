@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="styles.css">
+
+<!------------->
+<!-- HEAD -->
+<head>
+    <title>
+        URL Shortener | Cezary Miłek
+    </title>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/czarekmilek/URL-Shortener/main/favicon.ico?token=GHSAT0AAAAAACE4LTLQPIIUOETGXYQUNDBIZFQCAOA">
+    
+</head>
+
+<!------------->
+<!-- BODY -->
+<body>
+	<div class="header">
+		Create Short URL
+	</div>
+	<div class="form">
+		<div class="form_element">
+			<label for="long_url">
+                Enter link
+            </label>
+			<input type="text" id="long_url" placeholder="http://your-link-goes-here.com">
+		</div>
+		<div class="form_element">
+			<button id="create-short-url">
+                Create Short URL
+            </button>
+		</div>
+		<div class="result">
+			<a href="#" id="short_url" target="_blank"></a>
+		</div>
+	</div>
+	<div class="list">
+		<h2>
+            Your links
+        </h2>
+		<table id="list_urls">
+			<thead>
+				<tr>
+					<th>Long URL</th>
+					<th>Short URL</th>
+					<th>Link uses</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+
+    <script type="text/javascript">
+		const host = "http://localhost:5000/";
+		document.querySelector("#create-short-url").addEventListener("click", function(){
+			let long_url = document.querySelector("#long_url").value.trim();
+			if(long_url.length == 0){
+				alert("Enter valid url");
+				return;
+			} else if(!(long_url.startsWith("http://") || long_url.startsWith("https://"))){
+				alert("Enter valid link");
+				return;
+			}
+			fetch(host + "api/create-short-url",{
+				method:     "POST",
+				body:       JSON.stringify({
+					        long_url:long_url
+				}),
+				headers:{
+					"Content-type":"application/json; charset=UTF-8"
+				}
+			}).then(function(response){
+				return response.json();
+			}).then(function(data){
+				if(data.status == "ok"){
+					document.querySelector("#short-url").innerText = host + data.short_url_id;
+					document.querySelector("#short-url").href = host + data.short_url_id;
+					let html = `
+						<tr>
+							<td>${long_url}</td>
+							<td>${host}${data.short_url_id}</td>
+							<td>${0}</td>
+						</tr>
+					`;
+					document.querySelector("#list_urls tbody").innerHTML += html;
+				}
+			}).catch(function(error){
+				alert("Something went wrong...");
+			})
+		});
+		(function(){
+			fetch(host + "api/get-all-short-urls").then(function(response){
+				return response.json();
+			}).then(function(data){
+				let html = "";
+				for(let i=0; i<data.length; i++){
+					html += `
+						<tr>
+							<td>${data[i].long_url}</td>
+							<td>${host}${data[i].short_url_id}</td>
+							<td>${data[i].count}</td>
+						</tr>
+					`;
+				}
+				document.querySelector("#list_urls tbody").innerHTML = html;
+			}).catch(function(error){
+				alert("Something went wrong...");
+			})
+		})();
+	</script>
+
+</body>
+
+</html>
