@@ -2,7 +2,7 @@
 ### An URL Shortener App made in HTML, CSS, JavaScript, NodeJS and MySQL.
 The app allows you to create short links of long urls and keep count of link visits.
 
-Database used in the app is 'shorturls' with one table 'links':
+Database used in the app is ```shorturls``` with one table ```links```:
 
 **>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>**
 ```
