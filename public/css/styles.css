@@ -1,0 +1,88 @@
+* {
+    margin:             0px;
+    padding:            0px;
+    box-sizing:         border-box;
+}
+
+body {
+    font-family:        Roboto, sans-serif;
+    background-color:   white;
+}
+
+/* ------------- */ 
+/* HEADER */
+.header {
+    width:              100%;
+    height:             50px;
+    line-height:        50px;
+    text-align:         center;
+    background:         rgba(37, 43, 90, 0.9);
+    color:              whitesmoke;
+    font-weight:        666;
+}
+
+/* ------------- */ 
+/* FORM */
+.form {
+    padding:            50px 20px;
+    background:         rgba(95, 170, 185, 0.5);
+}
+
+.form > div {
+    width:              600px;
+    margin:             10px auto;
+}
+
+.form .form-element input,
+.form .form-element button {
+    width:              100%;
+    padding:            10px;
+    margin-top:         0;
+}
+
+.form .form-element button {
+    background:         rgba(40, 50, 90, 0.9);
+    color:              whitesmoke;
+    font-weight:        333;
+    outline:            none;
+    border:             none;
+    cursor:             pointer;    
+}
+
+.form .result {
+    text-align:         center;
+    border-top:         1px solid white;
+    margin-top:         3px;
+}
+
+/* ------------- */ 
+/* LIST */
+.list {
+    width:              800px;
+    margin:             43px auto;
+}
+
+.list h2 {
+    font-size:          43px;
+    margin-bottom:      21px;
+}
+
+.list table {
+    width:              100%;
+    text-align:         center;
+}
+
+.list table thead tr {
+    background:         rgba(110, 29, 86, 0.9);
+    color:              whitesmoke;
+}
+
+.list table thead tr th,
+.list table tbody tr td {
+    padding:            3px;
+}
+
+.list table tbody tr:nth-child(odd) {
+    background:         rgba(187, 127, 152, 0.753);
+}
+
